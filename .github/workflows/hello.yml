@@ -6,9 +6,17 @@ on:
       - main
 
 jobs:
-  hello_world_job:
+  hello_world_jobs:
     runs-on: ubuntu-18.04
     steps:
-      - name: say hello
+      - name: Say hello
         run: |
           echo "Hello World"
+          
+      - name: the time is
+        run: |
+          date
+      
+      - name: directory content
+        run: |
+          ls -l
