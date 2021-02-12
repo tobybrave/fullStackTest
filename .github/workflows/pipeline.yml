@@ -1,4 +1,4 @@
-name: deployment pipeline 
+name: deployment pipeline
 
 on:
   push:
@@ -16,4 +16,9 @@ jobs:
       - name: install dependencies
         run: npm install
       - name: lint
-        run: npm run eslint
+          run: npm run eslint
+      - name: build
+         run: npm run build
+      - name: test
+          run: npm test
+      
