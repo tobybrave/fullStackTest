@@ -9,7 +9,8 @@
     "test": "jest",
     "eslint": "eslint './**/*.{js,jsx}'",
     "lint:fix": "eslint './**/*.{js,jsx}' --fix",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "prod:logs": "heroku logs -t"
   },
   "repository": {
     "type": "git",

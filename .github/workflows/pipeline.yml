@@ -26,5 +26,3 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: fullstackpokedex
           heroku_email: 'uknowbrave@gmail.com'
-      - name: deployment logs
-        run: heroku logs -t
