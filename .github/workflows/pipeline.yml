@@ -28,3 +28,4 @@ jobs:
           heroku_email: 'uknowbrave@gmail.com'
           healthcheck: 'https://fullstackpokedex.herokuapp.com/health'
           checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
