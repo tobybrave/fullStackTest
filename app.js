@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 5000
 
 app.use(express.static('dist'))
 
-app.get('/check', (request, response) => {
+app.get('/health', (request, response) => {
   response.send('ok')
 })
 
