@@ -1,1 +1,1 @@
-web: node appi.js
+web: npm run start-prod
