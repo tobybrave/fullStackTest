@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
 
 jobs:
   deploy_pipeline_job:
@@ -21,7 +24,9 @@ jobs:
         run: npm run build
       - name: test
         run: npm test
-      - uses: akhileshns/heroku-deploy@v3.11.10
+      - name: deploy
+        if: ${{ github.event_name == 'push' }}
+        uses: akhileshns/heroku-deploy@v3.11.10
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: fullstackpokedex
