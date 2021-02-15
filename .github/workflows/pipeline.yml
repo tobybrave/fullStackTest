@@ -23,7 +23,7 @@ jobs:
         run: npm test
       - uses: akhileshns/heroku-deploy@v3.11.10
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEYs}}
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: fullstackpokedex
           heroku_email: 'uknowbrave@gmail.com'
           healthcheck: 'https://fullstackpokedex.herokuapp.com/health'
