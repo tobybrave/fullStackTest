@@ -1,23 +1,22 @@
 name: dummy CI
 
 on: 
-  pull_request:
+  push:
     branches: [main]
-    types: [opened, synchronize]
 
 jobs:
   check_context:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - name: github context
+      - name: github context event commit
         env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
+          GITHUB_CONTEXT: ${{ toJSON(github.event.commits) }}
         run: |
           echo "$GITHUB_CONTEXT"
-      - name: github event context
+      - name: 'curious github event commit'
         env:
-          GITHUB_EVENT_CONTEXT: ${{ toJSON(github.event) }}
+          GITHUB_EVENT_CONTEXT: ${{ toJSON(github.event.commits.*) }}
         run: |
           echo "$GITHUB_EVENT_CONTEXT"
       - name: commits
