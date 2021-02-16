@@ -22,5 +22,5 @@ jobs:
           echo "$GITHUB_EVENT_CONTEXT"
       - name: commits
         env: 
-          COMMIT: ${{ toJSON(github.event.commits) }}
+          COMMIT: ${{ toJSON(github.event.commits.*) }}
         run: echo "$COMMIT"
