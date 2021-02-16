@@ -1,0 +1,25 @@
+name: dummy CI
+
+on: 
+  push:
+    branches: [main]
+
+jobs:
+  check_context:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: github context event commit
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github.event.commits) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
+      - name: 'curious github event commit'
+        env:
+          GITHUB_EVENT_CONTEXT: ${{ toJSON(github.event.commits.*) }}
+        run: |
+          echo "$GITHUB_EVENT_CONTEXT"
+      - name: commits
+        env: 
+          COMMIT: ${{ toJSON(github.event.commits.*.message) }}
+        run: echo "$COMMIT"
