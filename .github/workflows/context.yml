@@ -14,14 +14,6 @@ jobs:
           GITHUB_COMMITS: ${{ toJSON(github.event.commits) }}
         run: echo "$GITHUB_COMMITS"
         
-      - name: commit message
-        env:
-          COMMIT_MESSAGES: ${{ toJSON(github.event.commits.*.message) }}
-        if: ${{ contains(COMMIT_MESSAGES, '#patch') }}
-        run: |
-          echo "$COMMIT_MESSAGES"
-          echo 'first worked'
-       
       - name: second trial
         if: ${{ contains(github.event.commits.*.message, '#patch') }}
         run: echo 'second worked'
