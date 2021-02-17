@@ -13,7 +13,12 @@ jobs:
         env:
           GITHUB_COMMITS: ${{ toJSON(github.event.commits) }}
         run: echo "$GITHUB_COMMITS"
-        
+      - name: context env
+        env:
+          COMMIT_MESSAGE: ${{ toJSON(github.event.commits.*.message) }}
+        if: contain(join("$COMMIT_MESSAGE"), "#patch")
+        run: echo works
+
       - name: second trial
         if: ${{ contains(join(github.event.commits.*.message), '#patch') }}
         run: echo 'second worked'
