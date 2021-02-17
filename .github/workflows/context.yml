@@ -8,7 +8,7 @@ jobs:
   context:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout
+      - uses: actions/checkout@v2
       - name: github context commits
         env:
           GITHUB_COMMITS: ${{ toJSON(github.event.commits) }}
