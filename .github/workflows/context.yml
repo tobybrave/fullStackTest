@@ -15,5 +15,5 @@ jobs:
         run: echo "$GITHUB_COMMITS"
         
       - name: second trial
-        if: ${{ contains(github.event.commits.*.message, '#patch') }}
+        if: ${{ contains(join(github.event.commits.*.message), '#patch') }}
         run: echo 'second worked'
