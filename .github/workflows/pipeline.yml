@@ -27,7 +27,7 @@ jobs:
       - name: test
         run: npm test
       - name: deploy
-        if: github.event_name == 'push' && !contain(join(env.COMMIT_MESSAGE), '#skip')
+        if: github.event_name == 'push' && !contains(join(env.COMMIT_MESSAGE), '#skip')
         uses: akhileshns/heroku-deploy@v3.11.10
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -38,7 +38,7 @@ jobs:
           delay: 5
           rollbackonhealthcheckfailed: true
       - name: Bump version and add tags
-        if: github.event_name == 'push' && !contain(join(env.COMMIT_MESSAGE), '#skip')
+        if: github.event_name == 'push' && !contains(join(env.COMMIT_MESSAGE), '#skip')
         uses: anothrNick/github-tag-action@1.34.0
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
