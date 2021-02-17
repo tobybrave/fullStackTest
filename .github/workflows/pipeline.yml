@@ -6,11 +6,13 @@ on:
       - main
   pull_request:
     branches: [main]
-    types: [opened, synchronize]
-
+    types: [opened, synchronize]                  
+    
 jobs:
   deploy_pipeline_job:
     runs-on: ubuntu-18.04
+    env: 
+      COMMIT_MESSAGE: ${{ toJSON(github.event.commits.*.message) }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -25,7 +27,7 @@ jobs:
       - name: test
         run: npm test
       - name: deploy
-        if: ${{ github.event_name == 'issue' }}
+        if: github.event_name == 'push' && !contain(join(env.COMMIT_MESSAGE), '#skip')
         uses: akhileshns/heroku-deploy@v3.11.10
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -36,11 +38,10 @@ jobs:
           delay: 5
           rollbackonhealthcheckfailed: true
       - name: Bump version and add tags
-        if: github.event_name == 'issue'
+        if: github.event_name == 'push' && !contain(join(env.COMMIT_MESSAGE), '#skip')
         uses: anothrNick/github-tag-action@1.34.0
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           WITH_V: true
           INITIAL_VERSION: '1.0.0'
           DEFAULT_BUMP: patch
-
