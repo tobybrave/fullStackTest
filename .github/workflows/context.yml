@@ -16,7 +16,7 @@ jobs:
       - name: context env
         env:
           COMMIT_MESSAGE: ${{ toJSON(github.event.commits.*.message) }}
-        if: contains(join(env.COMMIT_MESSAGE), "#patch")
+        if: contains(join(env.COMMIT_MESSAGE), '#patch')
         run: echo works
 
       - name: second trial
