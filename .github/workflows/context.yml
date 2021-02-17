@@ -1,25 +1,27 @@
-name: dummy CI
+name: context dummy
 
-on: 
+on:
   push:
     branches: [main]
-
+    
 jobs:
-  check_context:
+  context:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
-      - name: github context event commit
+      - uses: actions/checkout
+      - name: github context commits
         env:
-          GITHUB_CONTEXT: ${{ toJSON(github.event.commits) }}
-        run: |
-          echo "$GITHUB_CONTEXT"
-      - name: 'curious github event commit'
+          GITHUB_COMMITS: ${{ toJSON(github.event.commits) }}
+        run: echo "$GITHUB_COMMITS"
+        
+      - name: commit message
         env:
-          GITHUB_EVENT_CONTEXT: ${{ toJSON(github.event.commits.*) }}
+          COMMIT_MESSAGES: ${{ toJSON(github.event.commits.*.message) }}
+        if: ${{ contains(COMMIT_MESSAGES, '#patch') }}
         run: |
-          echo "$GITHUB_EVENT_CONTEXT"
-      - name: commits
-        env: 
-          COMMIT: ${{ toJSON(github.event.commits.*.message) }}
-        run: echo "$COMMIT"
+          echo "$COMMIT_MESSAGES"
+          echo 'first worked'
+       
+      - name: second trial
+        if: ${{ contains(github.event.commits.*.message, '#patch') }}
+        run: echo 'second worked'
